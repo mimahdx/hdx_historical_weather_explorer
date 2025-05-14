@@ -14,7 +14,7 @@ class HistoryRepository {
     final response = await http.get(
       url,
       headers: {
-        'User-Agent': 'HistoricalWeatherExplorer/1.0 (your.email@example.com)',
+        'User-Agent': 'HistoricalWeatherExplorer/1.0 (irraex@gmail.com)',
       },
     );
 
@@ -44,14 +44,14 @@ class HistoryRepository {
     final lon = coordinates['lon'];
 
     final url = Uri.parse(
-      '${Environment.baseUrl}/point/monthly?lat=$lat&lon=$lon&start=$startDate&end=$endDate',
+      '${Environment.meteostatBaseUrl}/point/monthly?lat=$lat&lon=$lon&start=$startDate&end=$endDate',
     );
 
     final response = await http.get(
       url,
       headers: {
         'x-rapidapi-host': 'meteostat.p.rapidapi.com',
-        'x-rapidapi-key': Environment.apiKey,
+        'x-rapidapi-key': Environment.meteostatApiKey,
       },
     );
 
@@ -75,7 +75,7 @@ class HistoryRepository {
     final response = await http.get(
       url,
       headers: {
-        'User-Agent': 'HistoricalWeatherExplorer/1.0 (your.email@example.com)',
+        'User-Agent': 'HistoricalWeatherExplorer/1.0 (irraexc@gmail.com)',
       },
     );
 
