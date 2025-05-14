@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hdx_historical_weather_explorer/core/env.dart';
-import 'package:hdx_historical_weather_explorer/utils/string_utils.dart';
+import 'package:hdx_historical_weather_explorer/core/constants.dart';
 import 'package:latlong2/latlong.dart';
 import 'common/secondary_button_style.dart';
 import '../cubit/history_cubit.dart';
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.indigo,
-        title: const Text(StringUtils.appTitle),
+        title: const Text(Constants.appTitle),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
             if (state is LocationCityResolved) {
               _controller.text = state.city;
               defaultLocation = state.location;
-              _safeMove(state.location, 10);
+              _safeMove(state.location, 8);
             }
 
             if (state is HistoryLoaded &&
@@ -133,7 +133,7 @@ class _HomePageState extends State<HomePage> {
     return TextField(
       controller: _controller,
       decoration: InputDecoration(
-        labelText: StringUtils.enterCityLabel,
+        labelText: Constants.enterCityLabel,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () => _pickDate(isStart: true),
               icon: const Icon(Icons.calendar_today),
               label: Text(
-                '${StringUtils.startDateLabel}\n${DateFormatUtils.formatDate(startDate!)}',
+                '${Constants.startDateLabel}\n${DateFormatUtils.formatDate(startDate!)}',
                 style: const TextStyle(fontSize: 15),
               ),
               style: secondaryButtonStyle(),
@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () => _pickDate(isStart: false),
               icon: const Icon(Icons.calendar_today_outlined),
               label: Text(
-                '${StringUtils.endDateLabel}\n${DateFormatUtils.formatDate(endDate!)}',
+                '${Constants.endDateLabel}\n${DateFormatUtils.formatDate(endDate!)}',
                 textAlign: TextAlign.start,
                 style: const TextStyle(fontSize: 15),
               ),
@@ -216,7 +216,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.deepPurple,
           foregroundColor: Colors.white,
         ),
-        child: const Text(StringUtils.getHistoryButton, style: TextStyle(fontSize: 18)),
+        child: const Text(Constants.getHistoryButton, style: TextStyle(fontSize: 18)),
       ),
     );
   }
@@ -274,7 +274,7 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            StringUtils.weatherSummaryTitle,
+            Constants.weatherSummaryTitle,
             style: Theme.of(
               context,
             ).textTheme.titleMedium?.copyWith(color: Colors.indigo),
@@ -282,11 +282,11 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 8),
           Text(summary),
           const SizedBox(height: 16),
-          Text(StringUtils.detailsTitle, style: Theme.of(context).textTheme.titleSmall),
-          Text('${StringUtils.avgTempTitle} ${state.data.tempAvg ?? '-'}${StringUtils.celciusUnit}'),
-          Text('${StringUtils.minTempTitle} ${state.data.tempMin ?? '-'}${StringUtils.celciusUnit}'),
-          Text('${StringUtils.maxTempTitle} ${state.data.tempMax ?? '-'}${StringUtils.celciusUnit}'),
-          Text('${StringUtils.precipitationTitle} ${state.data.precip ?? '-'} ${StringUtils.mmUnit}'),
+          Text(Constants.detailsTitle, style: Theme.of(context).textTheme.titleSmall),
+          Text('${Constants.avgTempTitle} ${state.data.tempAvg ?? '-'}${Constants.celciusUnit}'),
+          Text('${Constants.minTempTitle} ${state.data.tempMin ?? '-'}${Constants.celciusUnit}'),
+          Text('${Constants.maxTempTitle} ${state.data.tempMax ?? '-'}${Constants.celciusUnit}'),
+          Text('${Constants.precipitationTitle} ${state.data.precip ?? '-'} ${Constants.mmUnit}'),
         ],
       ),
     );

@@ -1,4 +1,4 @@
-class StringUtils {
+class Constants {
   static const appTitle = 'Historical Weather Explorer';
   static const enterCityLabel = 'Enter City (e.g. Manila)';
   static const getHistoryButton = 'Get History';
