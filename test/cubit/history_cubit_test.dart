@@ -50,7 +50,7 @@ void main() {
       final sub = cubit.stream.listen(emitted.add);
 
       await cubit.fetchHistoricalWeather('Cebu', range);
-      await Future.delayed(Duration.zero); // let states flush
+      await Future.delayed(Duration.zero); 
 
       expect(emitted.length, 2);
       expect(emitted[0], isA<HistoryLoading>());

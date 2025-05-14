@@ -36,7 +36,6 @@ void main() {
       ),
     );
 
-    // Wait for initial build
     await tester.pumpAndSettle();
 
     final buttonFinder = find.widgetWithText(ElevatedButton, 'Get History');
@@ -46,5 +45,31 @@ void main() {
     await tester.pump();
 
     verify(() => mockCubit.fetchHistoricalWeather(any(), any())).called(greaterThanOrEqualTo(1));
+  });
+
+  testWidgets('inputs city name and presses button', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: BlocProvider<HistoryCubit>.value(
+          value: mockCubit,
+          child: const HomePage(),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    final textField = find.byType(TextField);
+    expect(textField, findsOneWidget);
+
+    await tester.enterText(textField, 'Manila');
+    await tester.pump();
+
+    final buttonFinder = find.widgetWithText(ElevatedButton, 'Get History');
+    expect(buttonFinder, findsOneWidget);
+    await tester.tap(buttonFinder);
+    await tester.pump();
+
+    verify(() => mockCubit.fetchHistoricalWeather('Manila', any())).called(1);
   });
 }
